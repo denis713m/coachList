@@ -1,0 +1,84 @@
+
+.App {
+  text-align: center;
+  background: #0B3157;
+}
+.listContainer {
+  width:375px;
+  margin: 0 auto;
+  text-align: center;
+  background: #FFFFFF;
+  list-style-type: none;
+  padding: 0;
+
+}
+.profilePicture{
+  width: 48px;
+  height: 48px;
+  margin-right: 17px;
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+.coachRow{
+  display: flex;
+  height: 72px;
+  padding-left: 16px;
+  align-items: center;
+  justify-content: flex-start;
+  border-bottom: 1px solid #0B315710;
+
+}
+img{
+  width: 100%;
+
+}
+.coachInfo{
+  flex-grow: 2.5;
+}
+.coachName{
+  display: flex;
+  align-items: center;
+  color: #0B3157;
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+
+}
+.coachLevel{
+  display: flex;
+  align-items: center;
+  color: #0B3157;
+  font-size: 14px;
+  opacity: 0.5;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.check{
+  background: #DBE0E6;
+  width:28px;
+  height: 28px;
+  border-radius: 50%;
+  margin-right: 17px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.checked{
+  background: #48C1C2;
+}
+
+.checkedCoach {
+  text-align: left;
+  background: #FFFFFF;
+  padding: 16px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+}
+
+.delete{
+  height: 14px;
+  width:14px;
+  border-radius: 50%;
+  border: 1px solid red;
+}
