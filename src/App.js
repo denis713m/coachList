@@ -1,6 +1,9 @@
 import React from 'react';
+import ColorHash from 'color-hash';
+import ClassNames from 'classnames';
 import './App.css';
 import { mdiCheckBold } from '@mdi/js';
+import { mdiClose } from '@mdi/js';
 import Icon from '@mdi/react';
 
 
@@ -37,6 +40,12 @@ const items=[{
     firstName: "Tom",
     lastName: "Glover",
     profilePicture:"https://i.pinimg.com/564x/a8/35/90/a835903c5d506282e4e87fefc08e1d8c.jpg",
+  },{
+    id: 6,
+    level: 3,
+    firstName: "Winston",
+
+    profilePicture:"https://i.pinimg.com/564x/a8/35/90/a835903c5d506282e4e87fefc08e1d8c-11.jpg",
   }];
 
 
@@ -48,7 +57,12 @@ class App extends React.Component{
     this.state = {
       items:items.map((item)=>{return{...item, isSelected:false}})
     };
-    //this.checkClick = this.checkClick.bind(this);
+  }
+
+  static nameColor(name){
+    const colorHash = new ColorHash();
+    return (colorHash.hex(name));
+
   }
 
   checkClick (id){
@@ -64,13 +78,52 @@ class App extends React.Component{
 
   };
 
+  imageErrorLoading (id){
+    this.setState(
+        {
+          items: items.map((item)=>{
+            if(item.id===id){
+              item.profilePicture = null;
+            }
+            return item})
+        }
+    )
+
+  };
+
+  showImage(coach){
+    if(coach.profilePicture){
+      return(
+          <div className="profilePicture" >
+            <img src={coach.profilePicture} alt="pics"  onError={()=>this.imageErrorLoading(coach.id)} />
+          </div>
+      )
+    }
+    else{
+
+      return (
+          <div className="profilePicture" style={{backgroundColor:`${App.nameColor(`${coach.firstName||"Anonym"}${coach.lastName||"Anonymus"}`)}`}} >
+            {(coach.firstName||"Anonym").substring(0,1)}{(coach.lastName||"Anonymus").substring(0,1)}
+          </div>
+      )
+    }
+  }
+
+
   selectedCoaches = () => {
     return this.state.items.map((coach) => {
       if(coach.isSelected)
-      return <div key={coach.id+"sel"}>
-        <span >{coach.firstName} {coach.lastName}</span>
-        <span className="delete"> </span>
-      </div>
+      return (<div key={coach.id+"sel"} className="selectedCoach" >
+        <div >{coach.firstName||"Anonym"} {coach.lastName||"Anonymus"}</div>
+        <div className="delete" onClick={() => this.checkClick(coach.id)}>
+          <Icon path={ mdiClose}
+                size={1}
+                color="#48C1C2"
+          /></div>
+      </div>);
+      else{
+        return null;
+      }
 
     })
   };
@@ -79,24 +132,17 @@ class App extends React.Component{
 
 
     return this.state.items.map((coach) => {
-      let className = "check";
-      if(coach.isSelected) className = className + " checked";
+      const className = ClassNames({"check": true, "checked": coach.isSelected});
       return (
         <li key={coach.id} className = "coachRow">
-          <div className="profilePicture">
-            <img src={coach.profilePicture} alt="pics"/>
-          </div>
+          {this.showImage(coach)}
           <div className="coachInfo">
-            <div className="coachName">{coach.firstName} {coach.lastName}</div>
+            <div className="coachName">{coach.firstName||"Anonym"} {coach.lastName||"Anonymus"}</div>
             <div className="coachLevel" >Level {coach.level}</div>
           </div>
           <div className={className} onClick={() => this.checkClick(coach.id)}>
             <Icon path={mdiCheckBold}
-                  title="User Profile"
                   size={1}
-                  horizontal
-                  vertical
-                  rotate={180}
                   color="white"
                   />
           </div>
@@ -107,8 +153,9 @@ class App extends React.Component{
 
   render () {
     return (
-      <div className="App">
-        <div className = "listContainer">
+      <div >
+        <div className = "selectedCoachContainer">
+          To:
           {this.selectedCoaches()}
         </div>
         <ul className = "listContainer">

@@ -1,15 +1,40 @@
+:root {
+  --width: 375px;
+  --font:'Montserrat', sans-serif;
+}
 
-.App {
+
+
+
+#root {
   text-align: center;
   background: #0B3157;
+  height: 100vw;
+
 }
 .listContainer {
-  width:375px;
+  width:var( --width );
+  height: 100vw;
   margin: 0 auto;
   text-align: center;
   background: #FFFFFF;
   list-style-type: none;
   padding: 0;
+
+}
+.selectedCoachContainer{
+  display: flex;
+  justify-content: flex-start;
+  color: #0B315750;
+  align-items: center;
+  flex-wrap: wrap;
+  background: #FFFFFF;
+  width:calc(var( --width ) - 32px);
+  margin: 0 auto;
+  padding: 7px 16px;
+  border-bottom: 1px solid #0B315710;
+  font-family:  var(--font);
+  font-size: 14px;
 
 }
 .profilePicture{
@@ -18,6 +43,13 @@
   margin-right: 17px;
   border-radius: 30px;
   overflow: hidden;
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-align: center;
+  line-height: 48px;
+  font-size: 22px;
+  color: #FFFFFF;
+
 }
 
 .coachRow{
@@ -35,22 +67,20 @@ img{
 }
 .coachInfo{
   flex-grow: 2.5;
+  color: #0B3157;
+  font-family: var(--font);
 }
 .coachName{
-  display: flex;
-  align-items: center;
-  color: #0B3157;
+  text-align: start;
+
   font-size: 16px;
-  font-family: 'Montserrat', sans-serif;
+
 
 }
 .coachLevel{
-  display: flex;
-  align-items: center;
-  color: #0B3157;
+  text-align: start;
   font-size: 14px;
   opacity: 0.5;
-  font-family: 'Montserrat', sans-serif;
 }
 
 .check{
@@ -68,17 +98,24 @@ img{
   background: #48C1C2;
 }
 
-.checkedCoach {
-  text-align: left;
-  background: #FFFFFF;
-  padding: 16px;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 14px;
-}
-
 .delete{
   height: 14px;
   width:14px;
   border-radius: 50%;
-  border: 1px solid red;
+  border: 1px solid #48C1C2;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 2px;
+
+}
+
+.selectedCoach{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 2px;
+
+  color: #48C1C2;
 }
